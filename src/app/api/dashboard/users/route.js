@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/libs/db";
+import bcrypt from "bcrypt";
 
 export async function GET() {
   try {
@@ -13,6 +14,87 @@ export async function GET() {
       {
         status: 500,
       }
+    );
+  }
+}
+
+export async function POST(request) {
+  try {
+
+ 
+    const { FK_role, firstName, lastName, email, password } =
+      await request.json();
+
+    // Validar que todos los campos requeridos estén presentes
+    if (!FK_role || !firstName || !lastName || !email || !password) {
+      return NextResponse.json(
+        { message: "Todos los campos son obligatorios" },
+        { status: 400 }
+      );
+    }
+
+    // Validar formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { message: "Formato de email inválido" },
+        { status: 400 }
+      );
+    }
+
+    // Verificar si el email ya está registrado en la base de datos
+    const emailFound = await prisma.tbusers.findUnique({
+      where: {
+        email: email,
+      },
+    });
+
+    if (emailFound) {
+      return NextResponse.json(
+        { message: "El email ya está registrado" },
+        { status: 400 }
+      );
+    }
+
+    // Validar que la contraseña tenga al menos 6 caracteres
+    if (password.length < 6) {
+      return NextResponse.json(
+        { message: "La contraseña debe tener al menos 6 caracteres" },
+        { status: 400 }
+      );
+    }
+
+    // Hashear la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Crear el nuevo usuario en la base de datos
+    const newUser = await prisma.tbusers.create({
+      data: {
+        FK_role: Number(FK_role),
+        firstName,
+        lastName,
+        email,
+        password: hashedPassword,
+        // Añade otras propiedades del usuario si es necesario
+      },
+    });
+
+    // Devolver el usuario creado
+    return NextResponse.json(newUser);
+  } catch (error) {
+    // Controlar errores inesperados
+    console.error("Error al registrar el usuario:", error);
+
+    if (error.code === "P2002") {
+      return NextResponse.json(
+        { message: "Este email ya está registrado en el sistema" },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json(
+      { message: "Error interno del servidor" },
+      { status: 500 }
     );
   }
 }
