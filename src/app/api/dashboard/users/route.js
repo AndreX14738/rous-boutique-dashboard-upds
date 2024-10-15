@@ -18,15 +18,13 @@ export async function GET() {
   }
 }
 
+
 export async function POST(request) {
   try {
-
- 
-    const { FK_role, firstName, lastName, email, password } =
-      await request.json();
+    const { FK_role, firstName, lastName, CI, email, password } = await request.json();
 
     // Validar que todos los campos requeridos estén presentes
-    if (!FK_role || !firstName || !lastName || !email || !password) {
+    if (!FK_role || !firstName || !lastName || !CI || !email || !password) {
       return NextResponse.json(
         { message: "Todos los campos son obligatorios" },
         { status: 400 }
@@ -56,6 +54,20 @@ export async function POST(request) {
       );
     }
 
+    // Verificar si el CI ya está registrado en la base de datos
+    const CIExists = await prisma.tbusers.findUnique({
+      where: {
+        CI: CI,
+      },
+    });
+
+    if (CIExists) {
+      return NextResponse.json(
+        { message: "El CI ya está registrado" },
+        { status: 400 }
+      );
+    }
+
     // Validar que la contraseña tenga al menos 6 caracteres
     if (password.length < 6) {
       return NextResponse.json(
@@ -73,6 +85,7 @@ export async function POST(request) {
         FK_role: Number(FK_role),
         firstName,
         lastName,
+        CI,
         email,
         password: hashedPassword,
         // Añade otras propiedades del usuario si es necesario

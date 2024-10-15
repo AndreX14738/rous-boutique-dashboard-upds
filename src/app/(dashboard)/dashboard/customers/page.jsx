@@ -1,20 +1,20 @@
 import Table from "@/components/dashboard/common/Table";
-function AdministratorsPage() {
+function CustomersPage() {
   const columns = [
     "ID",
-    "Rol",
     "Nombre",
     "Apellido",
-    "Email",
+    "CI",
+    "email",
     "Estado",
     "Acciones",
   ];
 
   const rows = [
-    "PK_user",
-    "FK_role",
+    "PK_customer",
     "firstName",
     "lastName",
+    "CI",
     "email",
     "status",
   ];
@@ -22,12 +22,17 @@ function AdministratorsPage() {
   return (
     <section className="grid gap-4">
       <div className="py-4 p-2 ">
-        <h1 className="text-2xl text-zinc-200 font-medium">Administradores</h1>
+        <h1 className="text-2xl text-zinc-200 font-medium">Clientes</h1>
       </div>
 
-      <Table url={"users"} columns={columns} rows={rows} name={"usuario"} />
+      <Table
+        url={"customers"}
+        columns={columns}
+        rows={rows}
+        name={"cliente"}
+      />
     </section>
   );
 }
 
-export default AdministratorsPage;
+export default CustomersPage;

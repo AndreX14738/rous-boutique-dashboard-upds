@@ -15,7 +15,7 @@ function RolesPage() {
         url={"roles"}
         columns={columns}
         rows={rows}
-        pathname={"/dashboard/administrators/roles"}
+        name={"rol"}
       />
     </section>
   );

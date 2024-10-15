@@ -156,7 +156,7 @@ function Sidebar() {
             <li className=" hover:bg-blue-100  dark:hover:bg-zinc-950 rounded-md px-4 py-2">
               <Link
                 onClick={handlebtnclick}
-                href="/learn/statistics"
+                href="/dashboard/sales"
                 className="flex items-center gap-3"
               >
                 <svg
@@ -170,13 +170,67 @@ function Sidebar() {
                 >
                   <path
                     stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 4.5V19a1 1 0 0 0 1 1h15M7 14l4-4 4 4 5-5m0 0h-3.207M20 9v3.207"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z"
                   />
                 </svg>
-                <span>Estadisticas</span>
+
+                <span>Ventas</span>
+              </Link>
+            </li>
+            <li className=" hover:bg-blue-100  dark:hover:bg-zinc-950 rounded-md px-4 py-2">
+              <Link
+                onClick={handlebtnclick}
+                href="/dashboard/products"
+                className="flex items-center gap-3"
+              >
+                <svg
+                  className="w-5 h-5 text-gray-800 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15.583 8.445h.01M10.86 19.71l-6.573-6.63a.993.993 0 0 1 0-1.4l7.329-7.394A.98.98 0 0 1 12.31 4l5.734.007A1.968 1.968 0 0 1 20 5.983v5.5a.992.992 0 0 1-.316.727l-7.44 7.5a.974.974 0 0 1-1.384.001Z"
+                  />
+                </svg>
+
+                <span>Productos</span>
+              </Link>
+            </li>
+            <li className=" hover:bg-blue-100  dark:hover:bg-zinc-950 rounded-md px-4 py-2">
+              <Link
+                onClick={handlebtnclick}
+                href="/dashboard/customers"
+                className="flex items-center gap-3"
+              >
+                <svg
+                  className="w-5 h-5 text-gray-800 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="2"
+                    d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+
+                <span>Clientes</span>
               </Link>
             </li>
           </ul>

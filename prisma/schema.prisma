@@ -25,7 +25,7 @@ model tbroles {
 model tbusers {
   PK_user       Int             @id @default(autoincrement())
   FK_role       Int
-  CI            String          @db.VarChar(20)
+  CI            String          @unique @db.VarChar(20)
   firstName     String          @db.VarChar(80)
   lastName      String          @db.VarChar(80)
   email         String          @unique @db.VarChar(255)
@@ -95,9 +95,9 @@ model tbassists {
 
 model tbcustomers {
   PK_customer  Int       @id @default(autoincrement())
-  CI           String?    @db.VarChar(20)
-  firstName    String   @db.VarChar(80)
-  lastName     String   @db.VarChar(80)
+  CI           String?   @db.VarChar(20)
+  firstName    String    @db.VarChar(80)
+  lastName     String    @db.VarChar(80)
   email        String?   @unique @db.VarChar(255)
   password     String?   @db.VarChar(255)
   profileImage String?   @db.VarChar(255)

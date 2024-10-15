@@ -2,15 +2,20 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-function Table({ url, columns, rows, pathname }) {
+
+function Table({ url, columns, rows,name }) {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(2); // Número de filas por página
+  const [rowsPerPage, setRowsPerPage] = useState(10); // Número de filas por página
   const [filterStatus, setFilterStatus] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: "", direction: "asc" });
+
+  const pathname = usePathname();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,12 +91,12 @@ function Table({ url, columns, rows, pathname }) {
   };
 
   return (
-    <section className=" grid gap-4 shadow-md rounded-md border dark:border-zinc-800 p-6 ">
+    <section className=" grid gap-4 shadow-md rounded-md border dark:border-zinc-800 p-4 ">
       {/* Barra de búsqueda y filtro */}
       <div className=" flex items-center justify-between">
         <div className="relative w-1/3">
           <input
-            type="text"
+            type="search"
             placeholder="Buscar..."
             value={search}
             onChange={handleSearch}
@@ -125,10 +130,11 @@ function Table({ url, columns, rows, pathname }) {
         </select>
 
         <Link
-          href="/dashboard/administrators/create"
+          href={`${pathname}/create`}
           className=" flex gap-2 bg-white text-black px-4 py-2 rounded-md"
         >
-          <span>Agregar usuario</span>
+          <span>Agregar {name}</span>
+          
           <svg
             className="w-6 h-6 text-black"
             aria-hidden="true"
@@ -163,7 +169,6 @@ function Table({ url, columns, rows, pathname }) {
           value={rowsPerPage}
           onChange={handleRowsPerPageChange}
         >
-          <option value={2}>Filas por página: 2</option>
           <option value={10}>Filas por página: 10</option>
           <option value={20}>Filas por página: 20</option>
           <option value={50}>Filas por página: 50</option>
@@ -227,13 +232,10 @@ function Table({ url, columns, rows, pathname }) {
                     )}
                   </td>
                 ))}
-                <td className="px-6 py-4">
-                  <button
-                    onClick={() => console.log("Ver detalles de", row)}
-                    className="flex items-center text-blue-500 hover:underline"
-                  >
+                <td className="flex items-center py-3 justify-center text-blue-500">
+                  <Link href={`${pathname}/${row[rows[0]]}`}>
                     <svg
-                      className="w-5 h-5 mr-1"
+                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
                       strokeLinecap="round"
@@ -244,7 +246,7 @@ function Table({ url, columns, rows, pathname }) {
                       <path d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6z" />
                       <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                     </svg>
-                  </button>
+                  </Link>
                 </td>
               </tr>
             ))}
