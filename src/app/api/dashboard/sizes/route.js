@@ -16,3 +16,44 @@ export async function GET() {
     );
   }
 }
+
+
+
+export async function POST(request) {
+  try {
+    const { name } = await request.json();
+
+    if (!name) {
+      return NextResponse.json(
+        { message: "El campo talla es obligatorio" },
+        { status: 400 }
+      );
+    }
+
+    const nameExists = await prisma.tbsizes.findUnique({
+      where: {
+        name: name,
+      },
+    });
+
+    if (nameExists) {
+      return NextResponse.json(
+        { message: "La talla ya existe" },
+        { status: 400 }
+      );
+    }
+
+    const newname = await prisma.tbsizes.create({
+      data: {
+        name,
+      },
+    });
+
+    return NextResponse.json(newname);
+  } catch {
+    return NextResponse.json(
+      { message: "Error interno del servidor" },
+      { status: 500 }
+    );
+  }
+}

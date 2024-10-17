@@ -23,10 +23,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-white dark:bg-black text-white  antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-white dark:bg-black text-zinc-500 dark:text-zinc-400  antialiased`}
       >
         <SideBar />
-        <main className=" pt-20 px-4 md:px-16 ">{children}</main>
+        <main className=" pt-20 px-4 md:px-16 pb-16 ">{children}</main>
         <Footer />
       </body>
     </html>

@@ -68,9 +68,10 @@ function LoginPage() {
           <span className="text-sm text-red-600">{errors.email.message}</span>
         )}
 
-        <label className="text-black dark:text-zinc-300 " htmlFor="password">
-     
-        </label>
+        <label
+          className="text-black dark:text-zinc-300 "
+          htmlFor="password"
+        ></label>
         <input
           className="bg-zinc-100  dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-600  rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-zinc-300 dark:focus:ring-zinc-600  focus:border-transparent"
           type="password"

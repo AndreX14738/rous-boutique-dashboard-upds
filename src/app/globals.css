@@ -25,3 +25,9 @@
         placeholder:text-zinc-500;
   }
 }
+
+/* styles.css */
+details[open] summary svg {
+  transform: rotate(180deg);
+}
+

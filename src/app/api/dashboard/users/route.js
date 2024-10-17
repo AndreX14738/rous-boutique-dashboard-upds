@@ -55,13 +55,13 @@ export async function POST(request) {
     }
 
     // Verificar si el CI ya está registrado en la base de datos
-    const CIExists = await prisma.tbusers.findUnique({
+    const CIExists = await prisma.tbusers.findMany({
       where: {
         CI: CI,
       },
     });
 
-    if (CIExists) {
+    if (CIExists.length >= 1) {
       return NextResponse.json(
         { message: "El CI ya está registrado" },
         { status: 400 }
@@ -69,7 +69,7 @@ export async function POST(request) {
     }
 
     // Validar que la contraseña tenga al menos 6 caracteres
-    if (password.length < 6) {
+    if (password.length < 8) {
       return NextResponse.json(
         { message: "La contraseña debe tener al menos 6 caracteres" },
         { status: 400 }
@@ -106,7 +106,7 @@ export async function POST(request) {
     }
 
     return NextResponse.json(
-      { message: "Error interno del servidor" },
+      { message: error.message +"Error interno del servidor" },
       { status: 500 }
     );
   }

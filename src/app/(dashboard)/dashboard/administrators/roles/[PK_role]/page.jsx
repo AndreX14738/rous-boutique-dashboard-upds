@@ -4,15 +4,14 @@ async function DetailPage({ params }) {
     `${process.env.API_URL}/api/dashboard/roles/${params.PK_role}`
   );
   const role = response.data;
-    // Formatear la fecha utilizando métodos nativos de JavaScript
-    const createdAt = new Date(role.createdAt);
-    const formattedDate = createdAt.toLocaleDateString("es-ES", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  
+  // Formatear la fecha utilizando métodos nativos de JavaScript
+  const createdAt = new Date(role.createdAt);
+  const formattedDate = createdAt.toLocaleDateString("es-ES", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <section className="grid gap-4">
@@ -27,10 +26,12 @@ async function DetailPage({ params }) {
           Informacion del rol
         </h1>
 
-        <div key={role.PK_role}>
-          <h1>Rol: {role.role}</h1>
-          <h1>Creado: {formattedDate}</h1>
-        </div>
+        <h2 className="text-xl text-black dark:text-white font-medium">
+          Rol: {role.role}
+        </h2>
+        <p className="text-sm text-zinc-500 dark:text-zinc-500">
+          Creado el {formattedDate}
+        </p>
       </section>
     </section>
   );

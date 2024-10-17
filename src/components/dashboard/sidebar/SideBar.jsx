@@ -233,6 +233,33 @@ function Sidebar() {
                 <span>Clientes</span>
               </Link>
             </li>
+            <li className=" hover:bg-blue-100  dark:hover:bg-zinc-950 rounded-md px-4 py-2">
+              <Link
+                onClick={handlebtnclick}
+                href="/dashboard/transactions"
+                className="flex items-center gap-3"
+              >
+                <svg
+                  className="w-5 h-5 text-gray-800 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 10h18M6 14h2m3 0h5M3 7v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1Z"
+                  />
+                </svg>
+
+                <span>Transacciones</span>
+              </Link>
+            </li>
           </ul>
         </nav>
       </aside>
@@ -284,6 +311,33 @@ function Sidebar() {
                 />
               </svg>
               <span>Tu perfil</span>
+            </Link>
+          </li>
+          <li onClick={btnclickperfil}>
+            <Link
+              onClick={btnclickperfil}
+              href="/dashboard/assists"
+              className="flex items-center"
+            >
+              <svg
+                className="w-5 h-5 text-gray-800 dark:text-zinc-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+
+              <span>Asistencia</span>
             </Link>
           </li>
 
