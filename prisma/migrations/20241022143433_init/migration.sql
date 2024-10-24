@@ -230,6 +230,9 @@ CREATE TABLE "tbexpenses" (
 CREATE UNIQUE INDEX "tbroles_role_key" ON "tbroles"("role");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "tbusers_CI_key" ON "tbusers"("CI");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "tbusers_email_key" ON "tbusers"("email");
 
 -- CreateIndex
